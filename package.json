@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node tools/gen-compact.js",
     "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": "amio/emoji.json",
   "author": "Amio <amio.cn@gmail.com>",
