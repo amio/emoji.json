@@ -23,6 +23,9 @@ console.log(emoji[2])
 //   "keywords": "face, joy, laugh, tear"
 // }
 ```
+
+if you care about file size:
+
 ```javascript
 var emojiCompact = require('emoji.json/emoji-compact.json')
 console.log(emojiCompact)
