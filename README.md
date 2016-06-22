@@ -1,4 +1,4 @@
-# emoji.json
+# emoji.json [![npm](https://img.shields.io/npm/v/emoji.json.svg?style=flat-square)](https://www.npmjs.com/package/emoji.json)
 
 Just an emoji.json.
 
@@ -22,7 +22,8 @@ console.log(emoji[2])
 //   "default": "emoji",
 //   "keywords": "face, joy, laugh, tear"
 // }
-
+```
+```javascript
 var emojiCompact = require('emoji.json/emoji-compact.json')
 console.log(emojiCompact)
 // {
@@ -38,5 +39,5 @@ console.log(emojiCompact)
 
 **fetch from web**
 
-https://npmcdn.com/emoji.json/emoji.json
-https://npmcdn.com/emoji.json/emoji-compact.json
+- https://npmcdn.com/emoji.json/emoji.json
+- https://npmcdn.com/emoji.json/emoji-compact.json
