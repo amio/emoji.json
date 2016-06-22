@@ -8,7 +8,7 @@ Generated from [full-emoji-list](http://unicode.org/emoji/charts/full-emoji-list
 
 **install with npm**
 
-`npm i emoji.json` then:
+`npm install emoji.json` then:
 
 ```javascript
 var emoji = require('emoji.json')
@@ -22,8 +22,21 @@ console.log(emoji[2])
 //   "default": "emoji",
 //   "keywords": "face, joy, laugh, tear"
 // }
+
+var emojiCompact = require('emoji.json/emoji-compact.json')
+console.log(emojiCompact)
+// {
+//   "header": ["default","char","name","keywords"],
+//   "data": [
+//     ["emoji","😀","GRINNING FACE","face, grin"],
+//     ["emoji","😁","GRINNING FACE WITH SMILING EYES","eye, face, grin, smile"],
+//     ["emoji","😂","FACE WITH TEARS OF JOY","face, joy, laugh, tear"],
+//     ...
+//   ]
+// }
 ```
 
 **fetch from web**
 
 https://npmcdn.com/emoji.json/emoji.json
+https://npmcdn.com/emoji.json/emoji-compact.json
