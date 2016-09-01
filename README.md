@@ -42,5 +42,5 @@ console.log(emojiCompact)
 
 **fetch from web**
 
-- https://npmcdn.com/emoji.json/emoji.json
-- https://npmcdn.com/emoji.json/emoji-compact.json
+- https://unpkg.com/emoji.json/emoji.json
+- https://unpkg.com/emoji.json/emoji-compact.json
