@@ -1,5 +1,7 @@
 # emoji.json [![npm](https://img.shields.io/npm/v/emoji.json.svg?style=flat-square)](https://www.npmjs.com/package/emoji.json)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/amio/emoji.json.svg)](https://greenkeeper.io/)
+
 Just an emoji.json.
 
 Generated from [full-emoji-list](http://unicode.org/emoji/charts/full-emoji-list.html) with [this script](https://gist.github.com/amio/cad657690e027e80a614f3ba2141397b).
