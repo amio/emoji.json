@@ -1,6 +1,6 @@
 {
   "name": "emoji.json",
-  "version": "1.2.0",
+  "version": "5.0.0",
   "description": "Just an emoji.json.",
   "main": "index.js",
   "scripts": {
