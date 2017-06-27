@@ -13,11 +13,6 @@
   "license": "MIT",
   "bugs": "https://github.com/amio/emoji.json/issues",
   "homepage": "https://github.com/amio/emoji.json#readme",
-  "files": [
-    "index.js",
-    "emoji.json",
-    "emoji-compact.json"
-  ],
   "keywords": [
     "emoji",
     "json"
