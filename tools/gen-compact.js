@@ -1,14 +1,14 @@
 const fs = require('fs')
 const emoji = require('..')
 
-const compactEmoji = emoji.map(item => {
-  return JSON.stringify(
-    [item.char, item.name]
-  )
-})
+// const compactEmoji = emoji.map(({char, name}) => [char, name])
+const compactEmoji = emoji.map(({char}) => char)
 
-fs.writeFile('emoji-compact.json', compactEmoji, (err) => {
-  if (err) return console.error(err)
+function writeJSONFile (fname, json) {
+  fs.writeFile(fname, JSON.stringify(json), err => {
+    if (err) return console.error(err)
+    console.info(`${fname} generated`)
+  })
+}
 
-  console.log('emoji-compact.json generated.')
-})
+writeJSONFile('emoji-compact.json', compactEmoji)

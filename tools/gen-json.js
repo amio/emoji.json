@@ -1,15 +1,21 @@
 {
   const { $$, copy } = window // Chrome Console API
-  const ids = $$('td.rchars')
-  const trs = ids.map(e => e.parentElement).filter(x => x.children.length === 16)
-  const db = trs.map(tr => {
+
+  const andrs = $$('td.andr')
+  const trs = andrs.map(e => e.parentElement)
+
+  const emojis = trs.map(tr => {
     const tds = tr.children
+    const codes = tds[1].innerText.replace(/U\+/g, '')
     return {
       no: parseInt(tds[0].innerText),
-      code: tds[1].innerText.replace(/U\+/g, ''),
-      char: tds[2].innerText,
-      name: tds[15].innerText
+      codes: codes,
+      char: codes.split(' ').map(s => String.fromCodePoint(parseInt(s, 16))).join(''),
+      name: tds[3].innerText,
+      keywords: tds[4].innerText
     }
   })
-  copy(JSON.stringify(db, null, 2))
+
+  console.log(emojis)
+  copy(JSON.stringify(emojis, null, 2))
 }
