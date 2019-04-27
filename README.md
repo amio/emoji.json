@@ -17,10 +17,11 @@ var emoji = require('emoji.json')
 console.log(emoji[2])
 // {
 //   no: 3,
-//   codes: '1F602',
-//   char: '😂',
-//   name: 'face with tears of joy',
-//   keywords: 'face | face with tears of joy | joy | laugh | tear'
+//   codes: '1F604',
+//   char: '😄',
+//   name: 'grinning face with smiling eyes',
+//   keywords: 'eye | face | grinning face with smiling eyes | mouth | open | smile',
+//   category: 'Smileys & Emotion'
 // }
 ```
 
