@@ -2,11 +2,9 @@
   "name": "emoji.json",
   "version": "12.0.0",
   "description": "Just an emoji.json.",
-  "main": "index.js",
+  "main": "emoji.json",
   "scripts": {
-    "build": "node tools/gen-compact.js",
-    "prepublish": "npm run build",
-    "test": "echo \"no test specified\" && exit 0"
+    "build": "node scripts/gen.js"
   },
   "repository": "amio/emoji.json",
   "author": "Amio <amio.cn@gmail.com>",
@@ -15,6 +13,7 @@
   "homepage": "https://github.com/amio/emoji.json#readme",
   "keywords": [
     "emoji",
-    "json"
+    "json",
+    "unicode"
   ]
 }

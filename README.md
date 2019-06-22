@@ -2,7 +2,7 @@
 
 Just an emoji.json.
 
-Generated from [emoji-list](https://unicode.org/emoji/charts/emoji-list.html) with [this script](tools/gen-json.js).
+Generated from [emoji-test.txt](https://unicode.org/Public/emoji/12.0/emoji-test.txt) with [this script](scripts/gen-json.js).
 
 > NOTE: There are no Emoji versions 6.0-10.0 as a decision was made in 2017 to align emoji version numbers with their respective Unicode versions starting with version 11.0.
 
@@ -16,11 +16,9 @@ Generated from [emoji-list](https://unicode.org/emoji/charts/emoji-list.html) wi
 var emoji = require('emoji.json')
 console.log(emoji[2])
 // {
-//   no: 3,
 //   codes: '1F604',
 //   char: '😄',
 //   name: 'grinning face with smiling eyes',
-//   keywords: 'eye | face | grinning face with smiling eyes | mouth | open | smile',
 //   category: 'Smileys & Emotion'
 // }
 ```
