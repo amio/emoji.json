@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const https = require('https')
 
-const EMOJI_VERSION = '12.0'
+const EMOJI_VERSION = '12.1'
 
 main()
 
