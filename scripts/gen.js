@@ -22,6 +22,8 @@ async function main () {
       const meta = parseLine(line)
       if (meta) {
         meta.category = `${accu.group} (${accu.subgroup})`
+        meta.group = accu.group
+        meta.subgroup = accu.subgroup
         accu.full.push(meta)
         accu.compact.push(meta.char)
       } else {
