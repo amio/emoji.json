@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const https = require('https')
 
-const EMOJI_VERSION = '12.0'
+const EMOJI_VERSION = '12.1'
 
 main()
 
@@ -68,7 +68,7 @@ function parseLine (line) {
   }
 
   const [ codes, status, charAndName ] = data
-  const [ , char, name ] = charAndName.match(/^(\S+) (.+)$/)
+  const [ , char, name ] = charAndName.match(/^(\S+) E\d+\.\d+ (.+)$/)
 
   return { codes, char, name }
 }
