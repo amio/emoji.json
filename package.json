@@ -4,7 +4,8 @@
   "description": "Just an emoji.json.",
   "main": "emoji.json",
   "scripts": {
-    "build": "node scripts/gen.js"
+    "build": "node scripts/gen.js",
+    "prepack": "npm run build"
   },
   "repository": "amio/emoji.json",
   "author": "Amio <amio.cn@gmail.com>",
