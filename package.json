@@ -4,11 +4,17 @@
   "description": "Just an emoji.json.",
   "main": "emoji.json",
   "scripts": {
-    "build": "node scripts/gen.js",
+    "build": "./scripts/gen.sh",
     "prepack": "npm run build"
   },
-  "repository": "amio/emoji.json",
+  "repository": "https://github.com/amio/emoji.json",
   "author": "Amio <amio.cn@gmail.com>",
+  "contributors": [
+    {
+      "name": "Guillaume Gérard",
+      "url": "https://guillaume.sh"
+    }
+  ],
   "license": "MIT",
   "bugs": "https://github.com/amio/emoji.json/issues",
   "homepage": "https://github.com/amio/emoji.json#readme",

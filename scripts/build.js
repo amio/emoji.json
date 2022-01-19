@@ -1,12 +1,18 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const path = require('path')
 const https = require('https')
 
-const EMOJI_VERSION = '13.1'
+const EMOJI_VERSION = process.env.EMOJI_VERSION
 
 main()
 
 async function main () {
+  if (EMOJI_VERSION === undefined) {
+    throw new Error('Please specify EMOJI_VERSION')
+  }
+
   const text = await getTestFile(EMOJI_VERSION)
 
   console.log(`Format text to json...`)
