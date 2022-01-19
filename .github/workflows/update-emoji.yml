@@ -1,0 +1,36 @@
+name: Update emoji
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  push_update_pull_request:
+    name: Push update emoji pull-request
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Build new emoji files
+        run: npm run build
+      - name: Create Pull Request
+        id: create-pull-request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.github_write_token }}
+          commit-message: Update emoji
+          branch: update-emoji
+          title: "[Bot] Update emoji"
+      - name: Enable Pull Request Automerge
+        if: steps.create-pull-request.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v1
+        with:
+          token: ${{ secrets.github_repo_token }}
+          pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}

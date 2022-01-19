@@ -1,0 +1,51 @@
+name: Create new `git tag`, create new GitHub release and publish to NPM
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  create_git_tag:
+    name: Create new `git tag`
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      new_tag: ${{ steps.detect_then_tag.outputs.tag }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Detect and tag new version
+        id: detect_then_tag
+        uses: salsify/action-detect-and-tag-new-version@v2
+  create_github_release:
+    if: ${{ needs.create_git_tag.outputs.new_tag }}
+    name: Create new GitHub release
+    needs: create_git_tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: ncipollo/release-action@v1
+        with:
+          name: Release ${{ needs.create_git_tag.outputs.new_tag }}
+          tag: ${{ needs.create_git_tag.outputs.new_tag }}
+  publish_npm:
+    if: ${{ needs.create_git_tag.outputs.new_tag }}
+    name: Publish to NPM
+    needs: create_git_tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_automation_token }}
