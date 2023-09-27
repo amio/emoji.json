@@ -2,7 +2,7 @@
 
 Just an emoji.json.
 
-Generated from [emoji-test.txt](https://unicode.org/Public/emoji/13.0/emoji-test.txt) with [this script](scripts/gen.js).
+Generated from [emoji-test.txt](https://unicode.org/Public/emoji/15.1/emoji-test.txt) with [this script](scripts/gen.js).
 
 > NOTE: There are no Emoji versions 6.0-10.0 as a decision was made in 2017 to align emoji version numbers with their respective Unicode versions starting with version 11.0.
 
