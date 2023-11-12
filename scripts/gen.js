@@ -18,12 +18,16 @@ async function main () {
       accu.subgroup = line.substr(12)
     } else if (line.startsWith('#')) {
       accu.comments = accu.comments + line + '\n'
-    } else {
+    } 
+      else {
+        accu.qualification = line.substr(57);
+        accu.qualification = accu.qualification.substr(0, 20).trim();
       const meta = parseLine(line)
       if (meta) {
         meta.category = `${accu.group} (${accu.subgroup})`
         meta.group = accu.group
         meta.subgroup = accu.subgroup
+        meta.qualification = accu.qualification
         accu.full.push(meta)
         accu.compact.push(meta.char)
       } else {
