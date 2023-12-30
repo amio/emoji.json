@@ -70,9 +70,9 @@ function parseLine (line) {
   }
 
   const [ codes, status, charAndName ] = data
-  const [ , char, name ] = charAndName.match(/^(\S+) E\d+\.\d+ (.+)$/)
+  const [ , char, version, name ] = charAndName.match(/^(\S+) E(\d+\.\d+) (.+)$/)
 
-  return { codes, char, name, status }
+  return { codes, char, name, status, version }
 }
 
 const rel = (...args) => path.resolve(__dirname, ...args)
