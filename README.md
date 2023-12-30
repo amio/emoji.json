@@ -20,6 +20,7 @@ console.log(emoji[2])
 //   char: '😄',
 //   name: 'grinning face with smiling eyes',
 //   status: 'fully-qualified',
+//   version: '0.6',
 //   category: 'Smileys & Emotion (face-smiling)',
 //   group: 'Smileys & Emotion',
 //   subgroup: 'face-smiling'
