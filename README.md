@@ -19,7 +19,11 @@ console.log(emoji[2])
 //   codes: '1F604',
 //   char: '😄',
 //   name: 'grinning face with smiling eyes',
-//   category: 'Smileys & Emotion'
+//   status: 'fully-qualified',
+//   version: '0.6',
+//   category: 'Smileys & Emotion (face-smiling)',
+//   group: 'Smileys & Emotion',
+//   subgroup: 'face-smiling'
 // }
 ```
 
