@@ -82,9 +82,3 @@ jobs:
         fi
 
     - uses: stefanzweifel/git-auto-commit-action@v6
-
-    - name: Publish to npm
-      if: steps.check_changes.outputs.has_changes == 'true'
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npm publish
