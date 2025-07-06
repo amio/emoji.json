@@ -5,7 +5,8 @@
   "main": "emoji.json",
   "scripts": {
     "build": "node scripts/gen.js",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test": "node --test test/test.js"
   },
   "repository": "amio/emoji.json",
   "author": "Amio <amio.cn@gmail.com>",
