@@ -1,0 +1,91 @@
+name: Auto Emoji Update
+
+on:
+  schedule:
+    - cron: '0 2 * * 0' # Run every Sunday at 02:00 UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-emoji:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push changes
+      packages: write # Required to publish to npm
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+        cache: 'npm'
+    
+    - name: Install dependencies (if any)
+      run: |
+        if [ -f package.json ]; then
+          npm install
+        fi
+    
+    - name: Generate emoji data
+      run: npm run build
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if git diff --quiet; then
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "No changes detected"
+        else
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected"
+        fi
+
+    - name: Read version from file
+      if: steps.check_changes.outputs.has_changes == 'true'
+      id: read_version
+      run: |
+        if [ ! -f version ]; then
+          echo "Error: version file not found!"
+          exit 1
+        fi
+        VERSION=$(cat version)
+        echo "Version: $VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Commit changes
+      if: steps.check_changes.outputs.has_changes == 'true'
+      run: |
+        VERSION="${{ steps.read_version.outputs.version }}"
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        # Add changes to git
+        git add .
+        git commit -m "feat: update emoji data to version $VERSION"
+
+    - name: Compare version with package.json and bump version
+      if: steps.check_changes.outputs.has_changes == 'true'
+      id: compare_version
+      run: |
+        VERSION="${{ steps.read_version.outputs.version }}"
+        PKG_VERSION=$(jq -r .version package.json)
+        if [[ "$PKG_VERSION" == "$VERSION"* ]]; then
+          echo "update_type=update-minor" >> $GITHUB_OUTPUT
+          npm version patch
+        else
+          echo "update_type=update-major" >> $GITHUB_OUTPUT
+          npm version "$VERSION"
+        fi
+
+    - uses: stefanzweifel/git-auto-commit-action@v6
+
+    - name: Push changes and publish to npm
+      if: steps.check_changes.outputs.has_changes == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        npm publish --access public
+        echo "Published version $VERSION to npm"
