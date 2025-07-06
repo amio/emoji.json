@@ -21,6 +21,8 @@ jobs:
       with:
         node-version: '22.x'
         cache: 'npm'
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     
     - name: Install dependencies (if any)
       run: |
@@ -81,11 +83,8 @@ jobs:
 
     - uses: stefanzweifel/git-auto-commit-action@v6
 
-    - name: Push changes and publish to npm
+    - name: Publish to npm
       if: steps.check_changes.outputs.has_changes == 'true'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: |
-        npm publish --access public
-        echo "Published version $VERSION to npm"
+      run: npm publish
