@@ -2,12 +2,15 @@ const fs = require('fs')
 const path = require('path')
 const https = require('https')
 
-const EMOJI_VERSION = '16.0'
+const EMOJI_VERSION = 'latest'
 
 main()
 
 async function main () {
-  const text = await getTestFile(EMOJI_VERSION)
+  const text = await fetchTestFile(EMOJI_VERSION)
+
+  const version = parseVersion(text)
+  console.log(`Version: ${version}`)
 
   console.log(`Format text to json...`)
   const collected = text.trim().split('\n').reduce((accu, line) => {
@@ -36,15 +39,18 @@ async function main () {
   console.log(`Processed emojis: ${collected.full.length}`)
 
   console.log('Write file: emoji.json, emoji-compact.json \n')
-  await writeFiles(collected)
+  writeFile('emoji.json', collected.full)
+  writeFile('emoji-compact.json', collected.compact)
+  writeFile('version', version)
 
   console.log(collected.comments)
 }
 
-async function getTestFile (ver) {
+async function fetchTestFile (ver) {
   const url = `https://unicode.org/Public/emoji/${ver}/emoji-test.txt`
 
-  process.stdout.write(`Fetch emoji-test.txt (v${EMOJI_VERSION})`)
+  process.stdout.write(`Fetch emoji-test.txt (${ver})`)
+
   return new Promise((resolve, reject) => {
     https.get(url, res => {
       let text = ''
@@ -62,6 +68,16 @@ async function getTestFile (ver) {
   })
 }
 
+function parseVersion (text) {
+  const match = text.match(/# Version: (\d+\.\d+)/)
+
+  if (match) {
+    return match[1]
+  } else {
+    throw new Error('Could not find emoji version in the text')
+  }
+}
+
 function parseLine (line) {
   const data = line.trim().split(/\s+[;#] /)
 
@@ -75,9 +91,10 @@ function parseLine (line) {
   return { codes, char, name }
 }
 
-const rel = (...args) => path.resolve(__dirname, ...args)
-
-function writeFiles({ full, compact }) {
-  fs.writeFileSync(rel('../emoji.json'), JSON.stringify(full), 'utf8')
-  fs.writeFileSync(rel('../emoji-compact.json'), JSON.stringify(compact), 'utf8')
+function writeFile(filename, data) {
+  fs.writeFileSync(
+    path.resolve(__dirname, '../', filename),
+    typeof data === 'string' ? data : JSON.stringify(data),
+    'utf8'
+  )
 }
