@@ -1,9 +1,9 @@
-name: CI
+name: Build & Test
 
 on: [pull_request]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
